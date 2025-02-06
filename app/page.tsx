@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const ValentineProposal = () => {
   const [noCount, setNoCount] = useState(0);
@@ -16,20 +17,31 @@ const ValentineProposal = () => {
 
   const getNoButtonText = () => {
     const phrases = [
-      "No", "Are you sure?", "Really sure?", "Think again!", "Last chance!", 
-      "Surely not?", "You might regret this!", "Give it another thought!", 
-      "Are you absolutely certain?", "This could be a mistake!", "Have a heart!", 
-      "Don't be so cold!", "Change of heart?", "Wouldn't you reconsider?", 
-      "Is that your final answer?", "You're breaking my heart ;(" 
+      "No",
+      "Are you sure?",
+      "Really sure?",
+      "Think again!",
+      "Last chance!",
+      "Surely not?",
+      "You might regret this!",
+      "Give it another thought!",
+      "Are you absolutely certain?",
+      "This could be a mistake!",
+      "Have a heart!",
+      "Don't be so cold!",
+      "Change of heart?",
+      "Wouldn't you reconsider?",
+      "Is that your final answer?",
+      "You&#39;re breaking my heart ;(",
     ];
     return phrases[Math.min(noCount, phrases.length - 1)];
   };
 
   // Make the "No" button run away from the mouse only after 2 clicks
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isHovering && !yesPressed && noCount >= 2) {
       const noButton = document.getElementById("noButton");
-      if (!noButton) return;
+      if (!noButton) return; // Prevent errors if the button is not found
 
       const rect = noButton.getBoundingClientRect();
       const buttonCenter = {
@@ -61,9 +73,11 @@ const ValentineProposal = () => {
         <div className="text-center p-8 max-w-md">
           {yesPressed ? (
             <div className="space-y-6 animate-fade-in">
-              <img
+              <Image
                 src="https://i.postimg.cc/RFJ2Q2J8/download.gif"
                 alt="Celebration gif"
+                width={300}
+                height={300}
                 className="mx-auto rounded-lg shadow-lg"
               />
               <div className="space-y-4">
@@ -71,15 +85,17 @@ const ValentineProposal = () => {
                   Yay! You make me happy dearest ❤️
                 </h2>
                 <p className="text-xl text-gray-700">
-                  Even though we're separated by 8433Km, it'll be the best
+                  Even though we&#39;re separated by 8433Km, it&#39;ll be the best
                 </p>
               </div>
             </div>
           ) : (
             <div className="space-y-8">
-              <img
+              <Image
                 src="https://i.postimg.cc/VkbsvZD7/IMG-8375.jpg"
                 alt="Me and Rai"
+                width={300}
+                height={300}
                 className="mx-auto rounded-lg shadow-lg"
               />
               <h1 className="text-4xl font-bold text-pink-600 mb-8">
@@ -96,7 +112,7 @@ const ValentineProposal = () => {
                 <button
                   id="noButton"
                   className={`bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all absolute ${
-                    noCount >= 2 ? 'hover:cursor-pointer' : ''
+                    noCount >= 2 ? "hover:cursor-pointer" : ""
                   }`}
                   onClick={handleNoClick}
                   onMouseEnter={() => setIsHovering(true)}
