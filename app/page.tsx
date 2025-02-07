@@ -103,11 +103,10 @@ const ValentineProposal = () => {
           ) : (
             <div className="space-y-8">
               <Image 
-                src="/Sailor.gif" 
+                src="/sailor moon.jpeg" 
                 alt="Sailor" 
                 width={300} 
                 height={300} 
-                unoptimized
                 className="mx-auto rounded-lg shadow-lg"
               />
               
