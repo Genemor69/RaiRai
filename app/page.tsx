@@ -73,13 +73,7 @@ const ValentineProposal = () => {
         <div className="text-center p-8 max-w-md">
           {yesPressed ? (
             <div className="space-y-6 animate-fade-in">
-              <Image
-                src="https://i.postimg.cc/RFJ2Q2J8/download.gif"
-                alt="Celebration gif"
-                width={300}
-                height={300}
-                className="mx-auto rounded-lg shadow-lg"
-              />
+             <Image src="/me-and-rai.jpg" alt="Me and Rai" width={300} height={300} className="rounded-lg shadow-lg" />
               <div className="space-y-4">
                 <h2 className="text-4xl font-bold text-pink-600">
                   Yay! You make me happy dearest ❤️
@@ -101,7 +95,7 @@ const ValentineProposal = () => {
               <h1 className="text-4xl font-bold text-pink-600 mb-8">
                 Will you be my Valentine? 🌹
               </h1>
-              <div className="flex justify-center items-center gap-4 relative">
+              <div className="flex justify-center items-center gap-6">
                 <button
                   className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all"
                   style={{ fontSize: `${yesButtonSize}px` }}
