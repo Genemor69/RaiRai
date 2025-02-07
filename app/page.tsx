@@ -41,11 +41,11 @@ const ValentineProposal = () => {
       "Are you absolutely certain?",
       "This could be a mistake!",
       "Have a heart!",
-      "Don't be so cold!",
+      "Don&#39;t be so cold!",
       "Change of heart?",
-      "Wouldn't you reconsider?",
+      "Wouldn&#39;t you reconsider?",
       "Is that your final answer?",
-      "You're breaking my heart ;(",
+      "You&#39;re breaking my heart ;("  
     ];
     return phrases[Math.min(noCount, phrases.length - 1)];
   };
@@ -97,16 +97,19 @@ const ValentineProposal = () => {
               <Image src="/me-and-rai.jpg" alt="Me and Rai" width={300} height={300} className="rounded-lg shadow-lg" />
               <div className="space-y-4">
                 <h2 className="text-4xl font-bold text-pink-300">Yay! You make me happy, dearest ❤️</h2>
-                <p className="text-xl">Even though we're 8433Km apart, it'll be the best.</p>
+                <p className="text-xl">Even though we&#39;re 8433Km apart, it&#39;ll be the best.</p>
               </div>
             </div>
           ) : (
             <div className="space-y-8">
-               <img 
+              <Image 
                 src="/your-gif.gif" 
                 alt="Sailor" 
-                className="mx-auto rounded-lg shadow-lg w-[300px] h-auto"
-               />
+                width={300} 
+                height={300} 
+                unoptimized
+                className="mx-auto rounded-lg shadow-lg"
+              />
               
               <h1 className="text-4xl font-bold text-pink-300 mb-8">Will you be my Valentine? 🌹</h1>
               
