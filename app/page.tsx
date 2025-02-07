@@ -1,18 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 
 const ValentineProposal = () => {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  // Make the "Yes" button grow with each "No"
+  // Increase "Yes" button size when "No" is clicked
   const yesButtonSize = noCount * 20 + 16;
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
+  };
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   const getNoButtonText = () => {
@@ -32,16 +45,16 @@ const ValentineProposal = () => {
       "Change of heart?",
       "Wouldn't you reconsider?",
       "Is that your final answer?",
-      "You&#39;re breaking my heart ;(",
+      "You're breaking my heart ;(",
     ];
     return phrases[Math.min(noCount, phrases.length - 1)];
   };
 
-  // Make the "No" button run away from the mouse only after 2 clicks
+  // Make the "No" button run away after 2 clicks
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isHovering && !yesPressed && noCount >= 2) {
       const noButton = document.getElementById("noButton");
-      if (!noButton) return; // Prevent errors if the button is not found
+      if (!noButton) return;
 
       const rect = noButton.getBoundingClientRect();
       const buttonCenter = {
@@ -59,42 +72,45 @@ const ValentineProposal = () => {
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/sunset.jpg')" }}>
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
       {/* Background Music */}
-      <audio autoPlay loop>
+      <audio ref={audioRef} loop>
         <source src="/music.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Main Content */}
-      <div 
-        className="flex flex-col items-center justify-center min-h-screen bg-pink-50 relative"
-        onMouseMove={handleMouseMove}
-      >
+      <div className="relative flex flex-col items-center justify-center min-h-screen text-white" onMouseMove={handleMouseMove}>
+        {/* Music Button */}
+        <button
+          onClick={toggleMusic}
+          className="absolute top-4 right-4 bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-md transition"
+        >
+          {isPlaying ? "Pause Music 🎵" : "Play Music 🎶"}
+        </button>
+
         <div className="text-center p-8 max-w-md">
           {yesPressed ? (
             <div className="space-y-6 animate-fade-in">
-             <Image src="/me-and-rai.jpg" alt="Me and Rai" width={300} height={300} className="rounded-lg shadow-lg" />
+              <Image src="/me-and-rai.jpg" alt="Me and Rai" width={300} height={300} className="rounded-lg shadow-lg" />
               <div className="space-y-4">
-                <h2 className="text-4xl font-bold text-pink-600">
-                  Yay! You make me happy dearest ❤️
-                </h2>
-                <p className="text-xl text-gray-700">
-                  Even though we&#39;re separated by 8433Km, it&#39;ll be the best
-                </p>
+                <h2 className="text-4xl font-bold text-pink-300">Yay! You make me happy, dearest ❤️</h2>
+                <p className="text-xl">Even though we're 8433Km apart, it'll be the best.</p>
               </div>
             </div>
           ) : (
             <div className="space-y-8">
-              <Image
-                src="https://i.postimg.cc/VkbsvZD7/IMG-8375.jpg"
-                alt="Me and Rai"
-                width={300}
-                height={300}
-                className="mx-auto rounded-lg shadow-lg"
-              />
-              <h1 className="text-4xl font-bold text-pink-600 mb-8">
-                Will you be my Valentine? 🌹
-              </h1>
+               <img 
+                src="/your-gif.gif" 
+                alt="Sailor" 
+                className="mx-auto rounded-lg shadow-lg w-[300px] h-auto"
+               />
+              
+              <h1 className="text-4xl font-bold text-pink-300 mb-8">Will you be my Valentine? 🌹</h1>
+              
+              {/* Buttons Row */}
               <div className="flex justify-center items-center gap-6">
                 <button
                   className="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all"
@@ -105,17 +121,13 @@ const ValentineProposal = () => {
                 </button>
                 <button
                   id="noButton"
-                  className={`bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all absolute ${
-                    noCount >= 2 ? "hover:cursor-pointer" : ""
-                  }`}
+                  className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all"
                   onClick={handleNoClick}
                   onMouseEnter={() => setIsHovering(true)}
                   onMouseLeave={() => {
                     setIsHovering(false);
                     const noButton = document.getElementById("noButton");
-                    if (noButton) {
-                      noButton.style.transform = "none";
-                    }
+                    if (noButton) noButton.style.transform = "none";
                   }}
                 >
                   {getNoButtonText()}
