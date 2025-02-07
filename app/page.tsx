@@ -102,14 +102,7 @@ const ValentineProposal = () => {
             </div>
           ) : (
             <div className="space-y-8">
-              <Image 
-                src="/sailor moon.jpeg" 
-                alt="Sailor" 
-                width={300} 
-                height={300} 
-                className="mx-auto rounded-lg shadow-lg"
-              />
-              
+              <Image src="/sailor-moon" alt="sailor" width={300} height={300} className="rounded-lg shadow-lg" />
               <h1 className="text-4xl font-bold text-pink-300 mb-8">Will you be my Valentine? 🌹</h1>
               
               {/* Buttons Row */}
