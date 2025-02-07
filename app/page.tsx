@@ -103,7 +103,7 @@ const ValentineProposal = () => {
           ) : (
             <div className="space-y-8">
               <Image 
-                src="/your-gif.gif" 
+                src="/Sailor.gif" 
                 alt="Sailor" 
                 width={300} 
                 height={300} 
